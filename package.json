@@ -5,12 +5,15 @@
   "author": "Kevin McCarthy <mccarthyk@hcflgov.net>",
   "license": "MIT",
   "private": true,
+  "main": "dist/build.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.5.11"
+    "babel-polyfill": "^6.26.0",
+    "vue": "^2.5.11",
+    "whatwg-fetch": "^2.0.4"
   },
   "browserslist": [
     "> 1%",

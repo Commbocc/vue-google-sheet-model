@@ -2,6 +2,30 @@
 
 > A Vue.js project
 
+## Basic Use
+
+```html
+<div id="app">
+  <pre>{{ updated }}</pre>
+  <ul>
+    <li v-for="x in instances">
+      <pre>{{ x }}</pre>
+    </li>
+  </ul>
+</div>
+
+<script src="./dist/build.js"></script>
+<script type="text/javascript">
+new GoogleSheetModel({
+  propsData: {
+    sheetId: '1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A',
+    tableId: 2,
+    fields: ['heading', 'href', 'imagesrc', 'description']
+  }
+}).$mount('#app')
+</script>
+```
+
 ## Build Setup
 
 ``` bash

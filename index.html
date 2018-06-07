@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>google-sheet-model</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="./dist/build.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://commbocc.github.io/html-wrapper/static/css/app.css">
+
+  <title>google-sheet-model</title>
+</head>
+<body>
+
+  <div class="container">
+    <div id="app">
+      <pre>{{ updated }}</pre>
+      <ul>
+        <li v-for="x in instances">
+          <pre>{{ x }}</pre>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="./dist/build.js"></script>
+  <script type="text/javascript">
+  new GoogleSheetModel({
+    propsData: {
+      sheetId: '1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A',
+      tableId: 2,
+      fields: ['heading', 'href', 'imagesrc', 'description']
+    }
+  }).$mount('#app')
+  </script>
+</body>
 </html>
