@@ -8,7 +8,8 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js',
     library: 'GoogleSheetModel',
-    libraryExport: 'default'
+    libraryExport: 'default',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
