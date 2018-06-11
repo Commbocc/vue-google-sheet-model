@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 
 class Instance {
-  constructor (data) {
-    this.constructor.fields.forEach(h => {
-      this[h] = data[`gsx$${h}`].$t
+  constructor (data, fields) {
+    fields.forEach(f => {
+      this[f] = data[`gsx$${f}`].$t
     })
   }
 }
@@ -32,12 +32,14 @@ export default Vue.extend({
   },
   methods: {
     fetchJson () {
-      fetch(this.sheetEndpoint).then(res => res.json()).then(json => {
-        this.updated = new Date(json.feed.updated.$t)
-        if (json.feed.entry) {
-          this.instances = json.feed.entry.map(x => new Instance(x))
-        }
-      })
+      return fetch(this.sheetEndpoint).then(res => res.json()).then(this.setData)
+    },
+    setData (json) {
+      this.updated = new Date(json.feed.updated.$t)
+      if (json.feed.entry) {
+        this.instances = json.feed.entry.map(x => new Instance(x, this.fields))
+      }
+      return this
     }
   },
   computed: {
@@ -45,8 +47,7 @@ export default Vue.extend({
       return `https://spreadsheets.google.com/feeds/list/${this.sheetId}/${this.tableId}/public/values?alt=json`
     }
   },
-  created () {
-    Instance.fields = this.fields
+  beforeMount () {
     this.fetchJson()
   }
 })
