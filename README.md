@@ -14,15 +14,18 @@
   </ul>
 </div>
 
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
 <script src="./dist/build.js"></script>
 <script type="text/javascript">
-new GoogleSheetModel({
+new Vue({
+  el: '#app',
+  extends: GoogleSheetModel,
   propsData: {
     sheetId: '1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A',
     tableId: 2,
     fields: ['heading', 'href', 'imagesrc', 'description']
   }
-}).$mount('#app')
+})
 </script>
 ```
 
