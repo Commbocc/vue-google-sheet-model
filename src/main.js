@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import App from './App.vue'
-
 class Instance {
   constructor (data, fields) {
     fields.forEach(f => {
@@ -9,7 +6,7 @@ class Instance {
   }
 }
 
-export default Vue.extend({
+export default {
   props: {
     sheetId: {
       type: String,
@@ -50,4 +47,4 @@ export default Vue.extend({
   beforeMount () {
     this.fetchJson()
   }
-})
+}
