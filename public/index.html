@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/@hcflgov/vue-html-wrapper/dist/HcHtmlWrapper.css">
+  <title>google-sheet-model</title>
+</head>
+<body>
+  <noscript>
+    <strong>We're sorry but google-sheet-model doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+
+  <div id="app" class="container py-5">
+
+    <g-sheet v-slot="{ gsheet }" sheet-id="1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A" table-index="2" :fields="fields">
+      <ul>
+        <li v-for="(model, i) in gsheet.instances" :key="i">
+          <pre>{{ model }}</pre>
+        </li>
+      </ul>
+    </g-sheet>
+
+  </div>
+
+  <!-- built files will be auto injected -->
+</body>
+</html>
