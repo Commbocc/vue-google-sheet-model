@@ -1,50 +1,13 @@
-class Instance {
-  constructor (data, fields) {
-    fields.forEach(f => {
-      this[f] = data[`gsx$${f}`].$t
-    })
-  }
-}
+import Vue from 'vue/dist/vue.js'
+import App from './App.vue'
 
-export default {
-  props: {
-    sheetId: {
-      type: String,
-      required: true
-    },
-    tableId: {
-      type: Number,
-      required: true
-    },
-    fields: {
-      type: Array,
-      default: []
-    }
+Vue.config.productionTip = false
+
+new Vue({
+  components: {
+    gSheet: App
   },
-  data () {
-    return {
-      updated: null,
-      instances: []
-    }
-  },
-  methods: {
-    fetchJson () {
-      return fetch(this.sheetEndpoint).then(res => res.json()).then(this.setData)
-    },
-    setData (json) {
-      this.updated = new Date(json.feed.updated.$t)
-      if (json.feed.entry) {
-        this.instances = json.feed.entry.map(x => new Instance(x, this.fields))
-      }
-      return this
-    }
-  },
-  computed: {
-    sheetEndpoint () {
-      return `https://spreadsheets.google.com/feeds/list/${this.sheetId}/${this.tableId}/public/values?alt=json`
-    }
-  },
-  beforeMount () {
-    this.fetchJson()
-  }
-}
+  data: () => ({
+    fields: ['heading', 'href', 'imagesrc', 'description']
+  })
+}).$mount('#app')

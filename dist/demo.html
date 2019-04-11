@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<title>GoogleSheetModel demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./GoogleSheetModel.umd.js"></script>
+
+<div id="app">
+  <g-sheet v-slot="slotProps" sheet-id="1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A" table-index="2" :fields="fields">
+    <ul>
+      <li v-for="(model, i) in slotProps.gsheet.instances" :key="i">
+        {{ model.heading }}
+      </li>
+    </ul>
+  </g-sheet>
+</div>
+
+<!-- babel polyfill for promise support in IE -->
+<script src="https://unpkg.com/@babel/polyfill/dist/polyfill.min.js"></script>
+<script>
+  new Vue({
+    components: {
+      gSheet: GoogleSheetModel
+    },
+    data: function () {
+      return {
+        fields: ['heading', 'href', 'imagesrc', 'description']
+      }
+    }
+  }).$mount('#app')
+</script>

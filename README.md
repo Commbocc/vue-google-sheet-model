@@ -1,45 +1,29 @@
 # google-sheet-model
 
-> A Vue.js project
-
-## Basic Use
-
-```html
-<div id="app">
-  <pre>{{ updated }}</pre>
-  <ul>
-    <li v-for="x in instances">
-      <pre>{{ x }}</pre>
-    </li>
-  </ul>
-</div>
-
-<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-<script src="./dist/build.js"></script>
-<script type="text/javascript">
-new Vue({
-  el: '#app',
-  extends: GoogleSheetModel,
-  propsData: {
-    sheetId: '1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A',
-    tableId: 2,
-    fields: ['heading', 'href', 'imagesrc', 'description']
-  }
-})
-</script>
+## Project setup
+```
+npm install
 ```
 
-## Build Setup
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
+### Compiles and minifies for production
+```
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
