@@ -1,4 +1,18 @@
-# google-sheet-model
+# @hcflgov/vue-google-sheet-model
+
+![NPM](https://img.shields.io/npm/v/@hcflgov/vue-google-sheet-model.svg)
+
+## Installation
+
+### NPM
+
+```bash
+npm i --save @hcflgov/vue-google-sheet-model
+```
+
+### CDN
+
+https://unpkg.com/@hcflgov/vue-google-sheet-model
 
 ## Project setup
 ```
