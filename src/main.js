@@ -9,5 +9,10 @@ new Vue({
   },
   data: () => ({
     fields: ['heading', 'href', 'imagesrc', 'description']
-  })
+  }),
+  methods: {
+    dataReceived (data) {
+      console.log('success', data)
+    }
+  }
 }).$mount('#app')

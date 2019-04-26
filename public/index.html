@@ -15,12 +15,20 @@
 
   <div id="app" class="container py-5">
 
-    <g-sheet v-slot="{ gsheet }" sheet-id="1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A" table-index="2" :fields="fields">
-      <ul>
-        <li v-for="(model, i) in gsheet.instances" :key="i">
-          <pre>{{ model }}</pre>
-        </li>
-      </ul>
+    <g-sheet @success="dataReceived" v-slot="{ gsheet }" sheet-id="1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A" table-index="2" :fields="fields" @success="success">
+
+      <strong v-if="gsheet.loading">{{ gsheet.status }}</strong>
+
+      <div v-else>
+        <ul>
+          <li v-for="(model, i) in gsheet.instances" :key="i">
+            <pre>{{ model }}</pre>
+          </li>
+        </ul>
+
+        <em>Sheet Last Updated: <small>{{ gsheet.updated }}</small></em>
+      </div>
+
     </g-sheet>
 
   </div>

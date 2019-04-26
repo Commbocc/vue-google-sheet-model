@@ -38,19 +38,43 @@ export default {
     }
   },
   data: () => ({
+    loading: false,
+    status: null,
     updated: null,
     instances: []
   }),
   methods: {
     fetchJson () {
-      return axios.get(this.sheetEndpoint).then(this.setData)
+      this.loading = true
+      this.status = 'Loading'
+      return axios.get(this.sheetEndpoint).then(this.success).catch(this.failed).then(() => {
+        this.loading = false
+      })
     },
-    setData (response) {
+    success (response) {
+      this.status = 'Success'
       this.updated = new Date(response.data.feed.updated.$t)
       if (response.data.feed.entry) {
         this.instances = response.data.feed.entry.map(x => new Instance(x, this.fields))
       }
-    }
+      /**
+      * Returns the data of the component
+      *
+      * @type {event}
+      * @event success
+      */
+      this.$emit('success', this.$data)
+    },
+    failed (err) {
+      this.status = err
+      /**
+      * Returns the error.
+      *
+      * @type {event}
+      * @event failed
+      */
+      this.$emit('failed', err)
+    },
   },
   computed: {
     sheetEndpoint () {
