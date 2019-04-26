@@ -2888,12 +2888,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"553e40dc-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=2a9a15c8&lang=html&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"553e40dc-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=679282da&lang=html&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("default",null,{"gsheet":Object.assign({}, _vm.$data)})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=2a9a15c8&lang=html&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=679282da&lang=html&
 
 // EXTERNAL MODULE: ./node_modules/axios/index.js
 var axios = __webpack_require__("bc3a");
@@ -2966,24 +2966,53 @@ var Instance_Instance = function Instance(data, fields) {
   },
   data: function data() {
     return {
+      loading: false,
+      status: null,
       updated: null,
       instances: []
     };
   },
   methods: {
     fetchJson: function fetchJson() {
-      return axios_default.a.get(this.sheetEndpoint).then(this.setData);
-    },
-    setData: function setData(response) {
       var _this = this;
 
+      this.loading = true;
+      this.status = 'Loading';
+      return axios_default.a.get(this.sheetEndpoint).then(this.success).catch(this.failed).then(function () {
+        _this.loading = false;
+      });
+    },
+    success: function success(response) {
+      var _this2 = this;
+
+      this.status = 'Success';
       this.updated = new Date(response.data.feed.updated.$t);
 
       if (response.data.feed.entry) {
         this.instances = response.data.feed.entry.map(function (x) {
-          return new Instance_Instance(x, _this.fields);
+          return new Instance_Instance(x, _this2.fields);
         });
       }
+      /**
+      * Returns the data of the component
+      *
+      * @type {event}
+      * @event success
+      */
+
+
+      this.$emit('success', this.$data);
+    },
+    failed: function failed(err) {
+      this.status = err;
+      /**
+      * Returns the error.
+      *
+      * @type {event}
+      * @event failed
+      */
+
+      this.$emit('failed', err);
     }
   },
   computed: {
