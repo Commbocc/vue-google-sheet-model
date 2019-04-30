@@ -10,7 +10,7 @@ import axios from 'axios'
 import Instance from './Instance'
 
 /**
-* Use the rows of a Google Sheet spreadsheet as model instances.
+* Use the rows of a Google Sheet spreadsheet as model instances. Column names, set to lowercase with no spaces (`Start Date` becomes `startdate`), will be used as each model's attributes. Each instance will have the following attributes by default: `_id`, `_updated`, `_title`, `_content`
 */
 export default {
   name: 'GoogleSheetModel',
@@ -28,13 +28,6 @@ export default {
     tableIndex: {
       type: String,
       default: '1'
-    },
-    /**
-    * The fields that will be available to each instance. These are the headings of the sheet's columns set to lowercase with no spaces. `Start Date` becomes `startdate`
-    */
-    fields: {
-      type: Array,
-      required: true
     }
   },
   data: () => ({
@@ -55,7 +48,7 @@ export default {
       this.status = 'Success'
       this.updated = new Date(response.data.feed.updated.$t)
       if (response.data.feed.entry) {
-        this.instances = response.data.feed.entry.map(x => new Instance(x, this.fields))
+        this.instances = response.data.feed.entry.map(x => new Instance(x))
       }
       /**
       * Returns the data of the component

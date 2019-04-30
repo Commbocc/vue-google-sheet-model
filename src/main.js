@@ -7,9 +7,6 @@ new Vue({
   components: {
     gSheet: App
   },
-  data: () => ({
-    fields: ['heading', 'href', 'imagesrc', 'description']
-  }),
   methods: {
     dataReceived (data) {
       console.log('success', data)

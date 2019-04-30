@@ -15,13 +15,13 @@
 
   <div id="app" class="container py-5">
 
-    <g-sheet @success="dataReceived" v-slot="{ gsheet }" sheet-id="1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A" table-index="2" :fields="fields" @success="success">
+    <g-sheet @success="dataReceived" v-slot="{ gsheet }" sheet-id="1RDkV2W8dw8crhjBwRuklck3vwgF8Xe-qtpJCZY8ZY2A" table-index="2" @success="success">
 
       <strong v-if="gsheet.loading">{{ gsheet.status }}</strong>
 
       <div v-else>
         <ul>
-          <li v-for="(model, i) in gsheet.instances" :key="i">
+          <li v-for="model in gsheet.instances" :key="model._id">
             <pre>{{ model }}</pre>
           </li>
         </ul>
